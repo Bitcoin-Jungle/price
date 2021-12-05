@@ -3,7 +3,34 @@ import { protoDescriptor } from "./grpc";
 import { Server, ServerCredentials } from '@grpc/grpc-js';
 export const logger = require('pino')()
 export const healthCheck = require('grpc-health-check');
+import https from 'https';
 
+let crcExcahnge: number = 0;
+
+const getCrc = () => {
+  https.get('https://api.exchangeratesapi.io/v1/latest?access_key=f972721cec74736fd7d7caf42ecf5d18&base=USD&symbols=CRC', (resp) => {
+    let data = '';
+
+    // A chunk of data has been received.
+    resp.on('data', (chunk) => {
+      data += chunk;
+    });
+
+    // The whole response has been received. Print out the result.
+    resp.on('end', () => {
+      const json: any = JSON.parse(data)
+      if(json.success) {
+        crcExcahnge = json.rates.CRC
+      }
+    });
+  }).on("error", (err) => {
+    console.log("Error: " + err.message);
+  });
+}
+
+setInterval(getCrc, 60 * 1000 * 240)
+
+getCrc()
 
 export async function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -211,8 +238,8 @@ export const refresh = async (exchange) => {
     // FIXME: the object should be recycled instead of being recrated/replaced
     const ticker = Object.create(Ticker)
 
-    ticker.ask = ask
-    ticker.bid = bid
+    ticker.ask = ask * crcExcahnge
+    ticker.bid = bid * crcExcahnge
     ticker.timestamp = timestamp
     ticker.percentage = percentage
 
