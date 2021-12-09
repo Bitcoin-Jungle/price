@@ -238,8 +238,8 @@ export const refresh = async (exchange) => {
     // FIXME: the object should be recycled instead of being recrated/replaced
     const ticker = Object.create(Ticker)
 
-    ticker.ask = ask * crcExcahnge
-    ticker.bid = bid * crcExcahnge
+    ticker.ask = Math.round(ask * crcExcahnge)
+    ticker.bid = Math.round(bid * crcExcahnge)
     ticker.timestamp = timestamp
     ticker.percentage = percentage
 
@@ -249,7 +249,7 @@ export const refresh = async (exchange) => {
 const loop = async (exchange) => {
   await refresh(exchange)
   
-  const refresh_time = 2000
+  const refresh_time = 30000
 
   logger.debug({
     exchanges: data.exchanges,
