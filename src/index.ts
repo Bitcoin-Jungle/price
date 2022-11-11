@@ -57,7 +57,7 @@ const exchange_init = {
 
 const exchanges_json = [
   {
-    name: "bitfinex",
+    name: "bitfinex2",
     pair: "BTC/USD"
   },
   {
@@ -65,7 +65,7 @@ const exchanges_json = [
     pair: "BTC/USDT"
   }, 
   {
-    name: "ftx",
+    name: "okcoin",
     pair: "BTC/USD"
   } 
 ]
@@ -108,9 +108,9 @@ const Ticker = {
 
 interface Data {
   exchanges: {
-    bitfinex: typeof Ticker,
+    bitfinex2: typeof Ticker,
     binance: typeof Ticker,
-    ftx: typeof Ticker,
+    okcoin: typeof Ticker,
   }
   totalActive: number,
   mid: number,
@@ -122,9 +122,9 @@ interface Data {
 
 export const data: Data = {
   exchanges: {
-    bitfinex: Ticker,
+    bitfinex2: Ticker,
     binance: Ticker,
-    ftx: Ticker,
+    okcoin: Ticker,
   },
   // exchanges: {
   //  "bifinex": Ticker,
