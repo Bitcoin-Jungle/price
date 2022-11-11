@@ -31,8 +31,8 @@ meter.createValueObserver('price', {
   description: 'Example of a sync observer with callback',
 }, (observerResult) => {
   observerResult.observe(data.mid, { label: 'median' });
-  observerResult.observe(data.exchanges['bitfinex'].mid, { label: 'bitfinex' });
+  observerResult.observe(data.exchanges['bitfinex2'].mid, { label: 'bitfinex2' });
   observerResult.observe(data.exchanges['binance'].mid, { label: 'binance' });
-  observerResult.observe(data.exchanges['ftx'].mid, { label: 'ftx' });
+  observerResult.observe(data.exchanges['okcoin'].mid, { label: 'okcoin' });
 });
 
