@@ -32,7 +32,7 @@ meter.createValueObserver('price', {
 }, (observerResult) => {
   observerResult.observe(data.mid, { label: 'median' });
   observerResult.observe(data.exchanges['bitfinex2'].mid, { label: 'bitfinex2' });
-  observerResult.observe(data.exchanges['binance'].mid, { label: 'binance' });
-  observerResult.observe(data.exchanges['okcoin'].mid, { label: 'okcoin' });
+  observerResult.observe(data.exchanges['coinbase'].mid, { label: 'coinbase' });
+  observerResult.observe(data.exchanges['kraken'].mid, { label: 'kraken' });
 });
 
